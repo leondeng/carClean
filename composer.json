@@ -1,0 +1,53 @@
+{
+    "require": {
+        "php": "=7.0.21",
+        "phpunit/phpunit": ">6.0"
+    },
+    "autoload": {
+        "files": [
+            "src/helpers.php"
+        ],
+        "psr-4": {
+            "CarClean\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CarClean\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "container:build": [
+            "docker-compose -f docker/compose.yml build"
+        ],
+        "container:up": [
+            "docker-compose -f docker/compose.yml up -d"
+        ],
+        "container:install": [
+            "docker exec docker_php7021_1 /bin/sh -c 'composer install'"
+        ],
+        "container:stop": [
+            "docker-compose -f docker/compose.yml stop"
+        ],
+        "test": [
+            "php vendor/bin/phpunit"
+        ],
+        "test:coverage": [
+            "php vendor/bin/phpunit --coverage-clover=coverage.xml"
+        ],
+        "container:test": [
+            "docker exec docker_php7021_1 /bin/sh -c 'composer test'"
+        ],
+        "container:test:coverage": [
+            "docker exec docker_php7021_1 /bin/sh -c 'composer test:coverage'"
+        ],
+        "run": [
+            "docker exec docker_php7021_1 /bin/sh -c 'php src/app.php'"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist",
+        "process-timeout": 0
+    }
+
+}

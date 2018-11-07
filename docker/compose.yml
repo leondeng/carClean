@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  php7021:
+    image: goget/php7021
+    build: php7021
+    volumes:
+    - "../:/var/car_clean:rw"
+    tty: true
